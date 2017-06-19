@@ -1,0 +1,15 @@
+{
+  "name": "appbuilder3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Callan Milne <callan.milne@eviratec.com.au>",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "1.8.0"
+  }
+}

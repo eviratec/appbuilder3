@@ -1,0 +1,26 @@
+{
+  "name": "appbuilder3",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Callan Milne <callan.milne@eviratec.com.au>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.6.4",
+    "angular-aria": "1.6.4",
+    "angular-animate": "1.6.4",
+    "angular-material": "1.1.4",
+    "angular-messages": "1.6.4",
+    "angular-cookies": "1.6.4",
+    "angular-resource": "1.6.4"
+  }
+}
