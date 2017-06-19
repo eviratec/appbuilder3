@@ -34,6 +34,13 @@
 
   }
 
+  AppBuilder3.controller("ArrayDirectiveController", ArrayDirectiveController);
+
+  ArrayDirectiveController.$inject = ["$scope"];
+  function ArrayDirectiveController (  $scope) {
+
+  }
+
   AppBuilder3.controller("FormFieldDirectiveController", FormFieldDirectiveController);
 
   FormFieldDirectiveController.$inject = ["$scope"];
@@ -153,6 +160,26 @@
     }
   }
 
+  AppBuilder3.directive("abArray", abArrayDirective);
+
+  abArrayDirective.$inject = ["$compile", "JsonSchema"];
+  function abArrayDirective (  $compile,   JsonSchema) {
+
+    return {
+      restrict: "E",
+      require: ["^^abFormField"],
+      link: link,
+      controller: "ArrayDirectiveController",
+    };
+
+    function link (scope, el, attrs, ctrl) {
+      let arrEl = document.createElement("div");
+      arrEl.innerHTML = scope.abPropKey;
+      el[0].appendChild(arrEl);
+    }
+
+  }
+
   AppBuilder3.directive("abFormField", abFormFieldDirective);
 
   abFormFieldDirective.$inject = ["$compile", "JsonSchema"];
@@ -176,14 +203,15 @@
       console.log(scope.abPropKey, scope.abPropValue);
       console.log(ctrl);
 
-      let n = materialInputWrapper(scope.abPropKey, scope.abPropValue);
+      let n = inputEl(scope.abPropKey, scope.abPropValue);
+      n.setAttribute("flex", "");
       $compile(el[0].appendChild(n))(scope);
 
       function materialInputWrapper (key, value) {
         let div = document.createElement("md-input-container");
         div.setAttribute("class", "prop-" + key);
         div.appendChild(labelEl(key));
-        div.appendChild(inputEl(key, value));
+        div.appendChild(stringInputEl(key, value));
         return div;
       }
 
@@ -194,9 +222,50 @@
       }
 
       function inputEl (key, value) {
+        switch (value.type) {
+          case "string":
+            return materialInputWrapper(key, value);
+          case "array":
+            return arrayMgmtEl(key, value);
+          case "boolean":
+            return checkboxEl(key, value);
+        }
+      }
+
+      function stringInputEl (key, value)  {
+        switch (value.format) {
+          case "date-time":
+            return dateStringInputEl(key, value);
+          case "text":
+            // no break
+          default:
+            return textStringInputEl(key, value);
+        }
+      }
+
+      function dateStringInputEl (key, value)  {
+        let input = document.createElement("md-datepicker");
+        input.setAttribute("ng-model", "abModel");
+        return input;
+      }
+
+      function textStringInputEl (key, value)  {
         let input = document.createElement("input");
         input.setAttribute("ng-model", "abModel");
         return input;
+      }
+
+      function checkboxEl (key, value)  {
+        let checkbox = document.createElement("md-checkbox");
+        checkbox.setAttribute("ng-model", "abModel");
+        checkbox.appendChild(labelEl(key));
+        return checkbox;
+      }
+
+      function arrayMgmtEl (key, value) {
+        let arrayMgmt = document.createElement("ab-array");
+        arrayMgmt.setAttribute("ng-model", "abModel");
+        return arrayMgmt;
       }
 
     }
@@ -255,6 +324,7 @@
         el.setAttribute("ab-prop-key", key);
         el.setAttribute("ab-prop-value", "abSchema.properties." + key);
         el.setAttribute("ab-model", "abModel." + key);
+        el.setAttribute("layout", "");
         // el.appendChild(materialInputWrapper(key, value));
         return el;
       }
