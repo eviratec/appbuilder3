@@ -37,6 +37,13 @@
 
   }
 
+  AppBuilder3.controller("ObjectDirectiveController", ObjectDirectiveController);
+
+  ObjectDirectiveController.$inject = ["$scope"];
+  function ObjectDirectiveController (  $scope) {
+
+  }
+
   AppBuilder3.controller("ArrayDirectiveController", ArrayDirectiveController);
 
   ArrayDirectiveController.$inject = ["$scope"];
@@ -229,6 +236,41 @@
 
   }
 
+  AppBuilder3.directive("abObject", abObjectDirective);
+
+  abObjectDirective.$inject = ["$compile", "JsonSchema"];
+  function abObjectDirective (  $compile,   JsonSchema) {
+
+    return {
+      restrict: "E",
+      require: ["^^abFormField"],
+      link: link,
+      controller: "ObjectDirectiveController",
+    };
+
+    function link (scope, el, attrs, ctrl) {
+      let formEl;
+      let arrEl = document.createElement("div");
+      arrEl.innerHTML = scope.abPropKey;
+      el[0].appendChild(arrEl);
+      scope.form = [
+        "*",
+      ];
+      scope.model = {};
+      scope.$watch("abPropValue", (newValue) => {
+        console.log("##########################*******");
+        console.log(newValue);
+      })
+      formEl = document.createElement("div");
+      formEl.setAttribute("ab-schema", "abPropValue");
+      formEl.setAttribute("ab-form", "form");
+      formEl.setAttribute("ab-model", "model");
+      formEl.setAttribute("layout", "column");
+      $compile(el[0].appendChild(formEl))(scope);
+    }
+
+  }
+
   AppBuilder3.directive("abFormField", abFormFieldDirective);
 
   abFormFieldDirective.$inject = ["$compile", "JsonSchema"];
@@ -282,6 +324,8 @@
             return numberInputEl(key, value);
           case "array":
             return arrayMgmtEl(key, value);
+          case "object":
+            return objectMgmtEl(key, value);
           case "boolean":
             return checkboxEl(key, value);
         }
@@ -303,6 +347,10 @@
           case "date-time":
             return dateStringInputEl(key, value);
           case "text":
+            // no break
+          case "email":
+            // no break
+          case "password":
             // no break
           default:
             return textStringInputEl(key, value);
@@ -326,6 +374,11 @@
         checkbox.setAttribute("ng-model", "abModel");
         checkbox.appendChild(labelEl(key));
         return checkbox;
+      }
+
+      function objectMgmtEl (key, value) {
+        let objectMgmt = document.createElement("ab-object");
+        return objectMgmt;
       }
 
       function arrayMgmtEl (key, value) {

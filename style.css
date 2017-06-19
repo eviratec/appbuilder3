@@ -1,5 +1,23 @@
 
 form {
-    padding: 60px;
-    background-color: rgba(0,0,0,0.12);
+  padding: 60px;
+  background-color: rgba(0,0,0,0.12);
+}
+ab-object {
+  border-top:  1px solid rgba(0,0,0,0.12);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+ab-object div:nth-of-type(1) {
+  font-size: 2em;
+}
+
+ab-array {
+  display: block;
+  margin-top: 24px;
+}
+
+ab-array div:nth-of-type(1) {
+  font-size:  2em;
 }
