@@ -1,18 +1,22 @@
 {
   "name": "appbuilder3",
   "description": "",
-  "main": "index.js",
+  "main": "appbuilder3.js",
   "authors": [
     "Callan Milne <callan.milne@eviratec.com.au>"
   ],
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://www.eviratec.com.au",
   "ignore": [
     "**/.*",
+    "src",
+    "node_modules",
     "node_modules",
     "bower_components",
     "test",
     "tests"
+    "style.css",
+    "index.html",
   ],
   "dependencies": {
     "angular": "1.6.4",
