@@ -9,8 +9,8 @@
 
   AppBuilder3.controller("FormController", FormController);
 
-  FormController.$inject = ["$scope", "$timeout", "fetchSchema"];
-  function FormController (  $scope,   $timeout,   fetchSchema) {
+  FormController.$inject = ["$scope", "$timeout", "JsonSchema"];
+  function FormController (  $scope,   $timeout,   JsonSchema) {
 
     $scope.schemaUrl = "https://raw.githubusercontent.com/eviratec/schema/master/v1/customer.json#";
     $scope.schema = {};
@@ -23,13 +23,16 @@
     ];
     $scope.model = {};
 
-    fetchSchema($scope.schemaUrl)
+    JsonSchema.load($scope.schemaUrl)
       .then(function (res) {
-        console.log(res.data);
+        console.log(res);
         $timeout(function () {
-          $scope.schema = res.data;
+          $scope.schema = res;
           // Object.assign($scope.schema, res.data);
         });
+      })
+      .catch(err => {
+        console.log(err);
       });
 
   }
@@ -96,11 +99,40 @@
 
   AppBuilder3.factory("JsonSchema", JsonSchemaFactory);
 
-  JsonSchemaFactory.$inject = ["fetchSchema"];
-  function JsonSchemaFactory (  fetchSchema) {
+  JsonSchemaFactory.$inject = ["fetchSchema", "$timeout"];
+  function JsonSchemaFactory (  fetchSchema,   $timeout) {
     class JsonSchema {
       static get LOADING () {
         return "LOADING";
+      }
+      static load (url) {
+        return new Promise((resolve, reject) => {
+          fetchSchema(url)
+            .then(res => {
+              let jsonSchema;
+              let data = res.data;
+              let jsonString = JSON.stringify(data, undefined, "  ");
+              let subrefs = jsonString.match(/\"\$ref\"\: \"(.+)/gm);
+              if (!subrefs) {
+                resolve(new JsonSchema(res.data));
+                return;
+              }
+              let schemas = [];
+              let subrefUrls = subrefs.map(v => {
+                return v.substr(9).substr(0,v.length-10);
+              });
+              subrefUrls.forEach(url => {
+                schemas.push(fetchSchema(url));
+              });
+              Promise.all(schemas)
+                .then(() => {
+                  resolve(new JsonSchema(res.data));
+                })
+                .catch(err => {
+                  reject(err);
+                });
+            });
+        });
       }
       constructor (d) {
         this._d = d;
@@ -111,7 +143,7 @@
         this.additionalProperties = d.additionalProperties;
         this.required = d.required;
         this.properties = {};
-        this.subrefs = JSON.stringify(d, undefined, "  ").match(/\"\$ref\"\: \"(.+)/gm);
+
         hydrate(this, d.properties);
       }
       forEachProp (fn) {
@@ -123,16 +155,10 @@
     }
     return JsonSchema;
     function hydrate (jsonSchema, properties) {
-      let subrefUrls = [];
-      if (jsonSchema.subrefs) {
-        subrefUrls.push(...jsonSchema.subrefs.map(v => {
-          return v.substr(9).substr(0,v.length-10);
-        }));
-        // console.log(subrefUrls);
-      }
       Object.keys(properties).forEach(k => {
         let v = properties[k];
-        let ref = v.$ref || "array" === v.type && v.items.$ref;
+        let isArray = "array" === v.type;
+        let ref = v.$ref || isArray && v.items.$ref;
         if (!ref) {
           jsonSchema.properties[k] = v;
           return;
@@ -140,17 +166,21 @@
         if ("array" === v.type) {
           v.items = JsonSchema.LOADING;
           jsonSchema.properties[k] = v;
-          return;
         }
-        jsonSchema.properties[k] = JsonSchema.LOADING;
+        else {
+          jsonSchema.properties[k] = JsonSchema.LOADING;
+        }
         fetchSchema(ref)
           .then(res => {
-            let schema = new JsonSchema(res.data);
-            if ("array" === v.type) {
-              jsonSchema.properties[k].items = v;
-              return;
-            }
-            jsonSchema.properties[k] = schema;
+            $timeout(function () {
+              let schema = new JsonSchema(res.data);
+              if (isArray) {
+                console.log(res);
+                jsonSchema.properties[k].items = schema;
+                return;
+              }
+              jsonSchema.properties[k] = schema;
+            });
           })
           .catch(err => {
             console.log(`failed to fetch ref ${ref}:`);
@@ -173,9 +203,28 @@
     };
 
     function link (scope, el, attrs, ctrl) {
+      let formEl;
       let arrEl = document.createElement("div");
       arrEl.innerHTML = scope.abPropKey;
       el[0].appendChild(arrEl);
+      scope.form = [
+        "*",
+        {
+          type: "submit",
+          title: "Save"
+        }
+      ];
+      scope.model = {};
+      scope.$watch("abPropValue.items", (newValue) => {
+        console.log("***********************");
+        console.log(newValue);
+      })
+      formEl = document.createElement("form");
+      formEl.setAttribute("ab-schema", "abPropValue.items");
+      formEl.setAttribute("ab-form", "form");
+      formEl.setAttribute("ab-model", "model");
+      formEl.setAttribute("layout", "column");
+      $compile(el[0].appendChild(formEl))(scope);
     }
 
   }
@@ -207,6 +256,10 @@
       n.setAttribute("flex", "");
       $compile(el[0].appendChild(n))(scope);
 
+      scope.$watch("abPropValue", (newValue) => {
+        console.log(newValue);
+      });
+
       function materialInputWrapper (key, value) {
         let div = document.createElement("md-input-container");
         div.setAttribute("class", "prop-" + key);
@@ -225,11 +278,24 @@
         switch (value.type) {
           case "string":
             return materialInputWrapper(key, value);
+          case "number":
+            return numberInputEl(key, value);
           case "array":
             return arrayMgmtEl(key, value);
           case "boolean":
             return checkboxEl(key, value);
         }
+      }
+
+      function numberInputEl (key, value) {
+        let div = document.createElement("md-input-container");
+        div.setAttribute("class", "prop-" + key);
+        let inputEl = document.createElement("input");
+        inputEl.setAttribute("ng-model", "abModel");
+        inputEl.setAttribute("type", "number");
+        div.appendChild(labelEl(key));
+        div.appendChild(inputEl);
+        return div;
       }
 
       function stringInputEl (key, value)  {
@@ -264,7 +330,8 @@
 
       function arrayMgmtEl (key, value) {
         let arrayMgmt = document.createElement("ab-array");
-        arrayMgmt.setAttribute("ng-model", "abModel");
+        arrayMgmt.setAttribute("ab-schema", "abPropValue.items");
+        arrayMgmt.setAttribute("ab-model", "abModel");
         return arrayMgmt;
       }
 
@@ -333,52 +400,6 @@
       // console.log(scope.abSchema);
       // console.log(scope.abForm);
       // console.log(scope.abModel);
-      // console.log(scope);
-      // console.log(el);
-      // console.log(attrs);
-      // console.log(ctrl);
-
-    }
-
-  }
-
-  AppBuilder3.directive("abModel", abModelDirective);
-
-  abModelDirective.$inject = [];
-  function abModelDirective () {
-
-    return {
-      restrict: "A",
-      // require: ["abForm"],
-      link: link,
-    };
-
-    function link (scope, el, attrs, ctrl) {
-
-      // console.log("abModel");
-      // console.log(scope);
-      // console.log(el);
-      // console.log(attrs);
-      // console.log(ctrl);
-
-    }
-
-  }
-
-  AppBuilder3.directive("abSchema", abSchemaDirective);
-
-  abSchemaDirective.$inject = [];
-  function abSchemaDirective () {
-
-    return {
-      restrict: "A",
-      require: ["abForm"],
-      link: link,
-    };
-
-    function link (scope, el, attrs, ctrl) {
-
-      // console.log("abSchema");
       // console.log(scope);
       // console.log(el);
       // console.log(attrs);
