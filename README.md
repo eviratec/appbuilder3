@@ -4,6 +4,8 @@
 
 ### JSON Schema Forms
 
+*Inspired by [schemaform](http://schemaform.io/)*
+
 #### Include the JS
 
 ```html
