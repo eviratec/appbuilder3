@@ -70,6 +70,9 @@
 
         hydrate(this, d.properties);
       }
+      get name () {
+        return this.id.split(/\//g).slice(-1)[0];
+      }
       forEachProp (fn) {
         Object.keys(this.properties).forEach(k => {
           let v = this.properties[k];

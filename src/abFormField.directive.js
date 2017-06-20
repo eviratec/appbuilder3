@@ -28,7 +28,6 @@
 
     return {
       restrict: "E",
-      // require: ["^^abForm"],
       link: link,
       scope: {
         abPropKey: "@",

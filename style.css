@@ -21,3 +21,38 @@ ab-array {
 ab-array div:nth-of-type(1) {
   font-size:  2em;
 }
+
+ab-form-field.prop-prices {
+  display: none;
+}
+
+div[ab-table] div.table-header div.col-header,
+div[ab-table] div.table-data div.table-row div.table-cell {
+  text-align: center;
+}
+
+div[ab-table] div.table-data div.table-row div.table-cell {
+  display: inline-block;
+  line-height: 48px;
+  padding: 0 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div[ab-table] div.table-data div.table-row {
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+div[ab-table] div.table-header div.col-header {
+  display: inline-block;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,0.1);
+}
+
+div[ab-table] div.table-header {
+  line-height: 32px;
+  text-transform: uppercase;
+  font-size: 12.2px;
+}
