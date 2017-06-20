@@ -28,8 +28,8 @@ const MyApp = angular.module("MyApp", [
 ```javascript
 MyApp.controller("FormContainerCtrl", FormContainerCtrl);
 
-FormContainerCtrl.$inject = ["AppBuilder3.JsonSchema"];
-function FormContainerCtrl (              JsonSchema) {
+FormContainerCtrl.$inject = ["JsonSchema"];
+function FormContainerCtrl (  JsonSchema) {
 
   const $f = this;
 
@@ -81,8 +81,8 @@ and it's $refs
 ```javascript
 MyApp.controller("FormContainerCtrl", FormContainerCtrl);
 
-FormContainerCtrl.$inject = ["AppBuilder3.JsonSchema"];
-function FormContainerCtrl (              JsonSchema) {
+FormContainerCtrl.$inject = ["JsonSchema"];
+function FormContainerCtrl (  JsonSchema) {
 
   const $f = this;
 
