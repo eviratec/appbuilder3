@@ -1,5 +1,7 @@
 # AppBuilder3
 
+- [AppBuilder3 Wiki](https://github.com/eviratec/appbuilder3/wiki)
+
 ## Usage
 
 ### JSON Schema Forms
