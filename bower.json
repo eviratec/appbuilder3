@@ -1,5 +1,6 @@
 {
   "name": "appbuilder3",
+  "version": "1.0.0-ALPHA",
   "description": "",
   "main": "appbuilder3.js",
   "authors": [
@@ -14,9 +15,9 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
     "style.css",
-    "index.html",
+    "index.html"
   ],
   "dependencies": {
     "angular": "1.6.4",
