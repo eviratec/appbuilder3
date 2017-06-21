@@ -15,6 +15,13 @@ AppBuilder3 wiki: [Usage: JSON Schema Forms](https://github.com/eviratec/appbuil
 
 *Inspired by [schemaform](http://schemaform.io/)*
 
+#### Install it
+
+With, [**Bower**](https://bower.io/):
+```shell
+$ bower install --save-dev appbuilder3
+```
+
 #### Include the JS
 
 ```html
