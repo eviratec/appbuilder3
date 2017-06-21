@@ -1,7 +1,5 @@
 # AppBuilder3
 
-![appbuilder3 JSON Schema views screenshot](https://s3-ap-southeast-2.amazonaws.com/eviratec.software/json-schema-views.png)
-
 - [AppBuilder3 Wiki](https://github.com/eviratec/appbuilder3/wiki)
 - [Try the demo on Codepen.io](https://codepen.io/eviratec-software/pen/NgpZbL)
 
