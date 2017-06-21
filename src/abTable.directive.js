@@ -23,8 +23,8 @@
 
   AppBuilder3.directive("abTable", abTableDirective);
 
-  abTableDirective.$inject = ["$compile", "JsonSchema"];
-  function abTableDirective (  $compile,   JsonSchema) {
+  abTableDirective.$inject = ["$rootScope", "$compile", "JsonSchema"];
+  function abTableDirective (  $rootScope,   $compile,   JsonSchema) {
 
     return {
       restrict: "A",
@@ -54,6 +54,12 @@
 
       $compile(el[0].appendChild(rowContainerEl))(scope);
 
+      let bottomRowEl = document.createElement("div");
+      bottomRowEl.setAttribute("class", "table-footer");
+      bottomRowEl.setAttribute("layout", "row");
+
+      $compile(el[0].appendChild(bottomRowEl))(scope);
+
       ctrl.schema = scope.abSchema;
       ctrl.form = scope.abForm;
       ctrl.model = scope.abModel;
@@ -66,12 +72,17 @@
 
         newCols.forEach(newCol => {
           let colHeaderEl = document.createElement("div");
+          let colFooterEl = document.createElement("div");
           let propKey = newCol.property;
           let label = newCol.headers.label;
           colHeaderEl.setAttribute("class", "col-header " + propKey + "-col");
           colHeaderEl.setAttribute("flex", "");
           colHeaderEl.innerHTML = label;
           $compile(topRowEl.appendChild(colHeaderEl))(scope);
+          colFooterEl.setAttribute("class", "col-footer " + propKey + "-col");
+          colFooterEl.setAttribute("flex", "");
+          colFooterEl.innerHTML = "<md-input-container><input placeholder=\"" + label + "\" /></md-input-container>";
+          $compile(bottomRowEl.appendChild(colFooterEl))(scope);
           cols.push(newCol);
         });
 
@@ -90,11 +101,25 @@
           modelRowEl.setAttribute("class", "table-row model");
           modelRowEl.setAttribute("layout", "row");
           cols.forEach(col => {
-            let cellEl = document.createElement("div");
+            let cellEl = document.createElement("ab-table-cell");
+            let newScope = $rootScope.$new(true, scope);
+            newScope.abSchema = schema;
+            newScope.abCol = col;
+            newScope.abModel = newModel;
+            newScope.onClick = function ($event) {
+              console.log("clicked on cell", $event);
+              let onClick = col.cells.onClick;
+              onClick && onClick($event, newModel, schema);
+            };
             cellEl.setAttribute("class", "table-cell value");
             cellEl.setAttribute("flex", "");
-            cellEl.innerHTML = col.cells.value(newModel, schema)
-            $compile(modelRowEl.appendChild(cellEl))(scope);
+            cellEl.setAttribute("ab-schema", "abSchema");
+            cellEl.setAttribute("ab-col", "abCol");
+            cellEl.setAttribute("ab-model", "abModel");
+            // cellEl.setAttribute("ab-model", "abModel");
+            cellEl.setAttribute("ng-click", "onClick($event)");
+            cellEl.innerHTML = col.cells.value(newModel, schema);
+            $compile(modelRowEl.appendChild(cellEl))(newScope);
           });
           $compile(rowContainerEl.appendChild(modelRowEl))(scope);
         });

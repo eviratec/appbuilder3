@@ -35,7 +35,7 @@
         title: "Save",
       },
     ];
-    $scope.model = {};
+    $scope.abModel = {};
 
     $scope.subModel = {};
 
@@ -174,9 +174,9 @@
 
     $scope.table = {
       cols: [
+        typeCol(),
         priceCol(),
         currencyCol(),
-        typeCol(),
         validFromCol(),
         validThruCol(),
         isPublicCol(),
@@ -202,7 +202,7 @@
     }
 
     function currencyCol () {
-      return col("currency", "CUR", function getCellValue (model, schema) {
+      return col("currency", "Currency", function getCellValue (model, schema) {
         return model.amount.currency.code;
       });
     }
@@ -227,7 +227,10 @@
 
     function isPublicCol () {
       return col("is_public", "Public", function getCellValue (model, schema) {
-        return model.is_public;
+        let x = document.createElement("md-checkbox");
+        x.innerHTML = "Yes";
+        return x;
+        // return model.is_public;
       });
     }
 
@@ -239,6 +242,14 @@
         },
         "cells": {
           "value": getValueFn,
+          "onClick": function ($event, model, schema) {
+            let key = property;
+            let value = getValueFn(model, schema);
+            alert(
+              `Clicked '${key}' column, current value is '${value}' for` +
+              ` model ${model}`
+            );
+          },
         },
       };
     }

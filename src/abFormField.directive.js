@@ -67,8 +67,6 @@
 
       function inputEl (key, value) {
         switch (value.type) {
-          case "string":
-            return materialInputWrapper(key, value);
           case "number":
             return numberInputEl(key, value);
           case "array":
@@ -77,6 +75,10 @@
             return objectMgmtEl(key, value);
           case "boolean":
             return checkboxEl(key, value);
+          default:
+            // no break
+          case "string":
+            return materialInputWrapper(key, value);
         }
       }
 
