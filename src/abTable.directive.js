@@ -32,7 +32,7 @@
       scope: {
         abSchema: "=",
         abTable: "=",
-        abModel: "=",
+        abModels: "=",
       },
       controller: "TableDirectiveController",
       transclude: true,
@@ -61,8 +61,8 @@
       $compile(el[0].appendChild(bottomRowEl))(scope);
 
       ctrl.schema = scope.abSchema;
-      ctrl.form = scope.abForm;
-      ctrl.model = scope.abModel;
+      ctrl.table = scope.abTable;
+      ctrl.models = scope.abModels;
 
       scope.$watchCollection("abTable.cols", (newCols) => {
 
@@ -88,7 +88,7 @@
 
       });
 
-      scope.$watchCollection("abModel", (newModels) => {
+      scope.$watchCollection("abModels", (newModels) => {
 
         if (!newModels.length) {
           return;
@@ -116,7 +116,6 @@
             cellEl.setAttribute("ab-schema", "abSchema");
             cellEl.setAttribute("ab-col", "abCol");
             cellEl.setAttribute("ab-model", "abModel");
-            // cellEl.setAttribute("ab-model", "abModel");
             cellEl.setAttribute("ng-click", "onClick($event)");
             cellEl.innerHTML = col.cells.value(newModel, schema);
             $compile(modelRowEl.appendChild(cellEl))(newScope);
