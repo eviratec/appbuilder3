@@ -1,11 +1,19 @@
 # AppBuilder3
 
+![appbuilder3 JSON Schema views screenshot](https://s3-ap-southeast-2.amazonaws.com/eviratec.software/json-schema-views.png)
+
 - [AppBuilder3 Wiki](https://github.com/eviratec/appbuilder3/wiki)
 - [Try the demo on Codepen.io](https://codepen.io/eviratec-software/pen/NgpZbL)
 
 ## Usage
 
+### JSON Schema Tables
+
+AppBuilder3 wiki: [Usage: JSON Schema Tables](https://github.com/eviratec/appbuilder3/wiki/Usage:-JSON-Schema-Tables)
+
 ### JSON Schema Forms
+
+AppBuilder3 wiki: [Usage: JSON Schema Forms](https://github.com/eviratec/appbuilder3/wiki/Usage:-JSON-Schema-Forms)
 
 *Inspired by [schemaform](http://schemaform.io/)*
 
@@ -75,53 +83,7 @@ function FormContainerCtrl (  JsonSchema) {
 }
 ```
 
-#### Fetch a remote JSON Schema
-
-and it's $refs
-
-```javascript
-MyApp.controller("FormContainerCtrl", FormContainerCtrl);
-
-FormContainerCtrl.$inject = ["JsonSchema"];
-function FormContainerCtrl (  JsonSchema) {
-
-  const $f = this;
-
-  $f.schemaUrl = _schemaUrl("v1/product.json#");
-
-  $f.schema = {};
-
-  $f.form = [
-    "*",
-    {
-      type: "submit",
-      title: "Save"
-    }
-  ];
-
-  $f.model = {};
-
-  loadSchema();
-
-  function loadSchema () {
-    JsonSchema.load($f.schemaUrl)
-      .then(function (res) {
-        $timeout(function () {
-          $f.schema = res;
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  function _schemaUrl (schemaId) {
-    return "https://raw.githubusercontent.com" +
-      "/eviratec/schema/master/" + schemaId;
-  }
-
-}
-```
+*-or-* [Fetch a remote JSON Schema](https://github.com/eviratec/appbuilder3/wiki/Usage:-JSON-Schema-Forms#fetch-a-remote-json-schema)
 
 #### Render the form
 
