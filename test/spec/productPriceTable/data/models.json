@@ -1,46 +1,46 @@
 [{
   "amount": {
     "currency": { "code": "AUD" },
-    "units": 120.00,
+    "units": 120.00
   },
   "type": "PROMO",
   "date_from": "2017-01-01T00:00:00.000Z",
   "date_thru": "2017-07-01T00:00:00.000Z",
-  "is_public": true,
+  "is_public": true
 }, {
   "amount": {
     "currency": { "code": "AUD" },
-    "units": 149.00,
+    "units": 149.00
   },
   "type": "LIST",
   "date_from": "2016-01-01T00:00:00.000Z",
   "date_thru": null,
-  "is_public": true,
+  "is_public": true
 }, {
   "amount": {
     "currency": { "code": "AUD" },
-    "units": 61.00,
+    "units": 61.00
   },
   "type": "PURCH",
   "date_from": "2016-01-01T00:00:00.000Z",
   "date_thru": null,
-  "is_public": true,
+  "is_public": true
 }, {
   "amount": {
     "currency": { "code": "AUD" },
-    "units": 229.00,
+    "units": 229.00
   },
   "type": "LIST",
   "date_from": null,
   "date_thru": "2016-01-01T00:00:00.000Z",
-  "is_public": true,
+  "is_public": true
 }, {
   "amount": {
     "currency": { "code": "AUD" },
-    "units": 94.00,
+    "units": 94.00
   },
   "type": "PURCH",
   "date_from": null,
   "date_thru": "2016-01-01T00:00:00.000Z",
-  "is_public": true,
+  "is_public": true
 }]

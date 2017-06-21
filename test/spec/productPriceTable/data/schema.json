@@ -12,7 +12,7 @@
     },
     "type": {
       "type": "string",
-      "maxLength": 18,
+      "maxLength": 18
     },
     "amount": {
       "id": "https://raw.githubusercontent.com/eviratec/schema/master/v1/currency/amount.json#",

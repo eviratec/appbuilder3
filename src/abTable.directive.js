@@ -93,36 +93,51 @@
         if (!newModels || !newModels.length) {
           return;
         }
-        console.log(newModels,"****NEW MODELS",cols);
 
-        newModels = Array.of(newModels);
+        if ("string" === typeof newModels) {
+          newModels = JSON.parse(newModels);
+        }
 
         newModels.forEach(newModel => {
+
           let modelRowEl = document.createElement("div");
           let schema = scope.abSchema;
+          let rowScope = $rootScope.$new(true, scope);
+
           modelRowEl.setAttribute("class", "table-row model");
           modelRowEl.setAttribute("layout", "row");
+
+          $compile(rowContainerEl.appendChild(modelRowEl))(rowScope);
+
           cols.forEach(col => {
+
             let cellEl = document.createElement("ab-table-cell");
-            let newScope = $rootScope.$new(true, scope);
-            newScope.abSchema = schema;
-            newScope.abCol = col;
-            newScope.abModel = newModel;
-            newScope.onClick = function ($event) {
+            let cellScope = $rootScope.$new(true, rowScope);
+
+            cellScope.abSchema = schema;
+            cellScope.abCol = col;
+            cellScope.abModel = newModel;
+
+            cellScope.onClick = function ($event) {
               console.log("clicked on cell", $event);
               let onClick = col.cells.onClick;
               onClick && onClick($event, newModel, schema);
             };
+
             cellEl.setAttribute("class", "table-cell value");
             cellEl.setAttribute("flex", "");
             cellEl.setAttribute("ab-schema", "abSchema");
             cellEl.setAttribute("ab-col", "abCol");
             cellEl.setAttribute("ab-model", "abModel");
             cellEl.setAttribute("ng-click", "onClick($event)");
+
             cellEl.innerHTML = col.cells.value(newModel, schema);
-            $compile(modelRowEl.appendChild(cellEl))(newScope);
+
+            $compile(modelRowEl.appendChild(cellEl))(cellScope);
+            // modelRowEl.appendChild(cellEl);
+
           });
-          $compile(rowContainerEl.appendChild(modelRowEl))(scope);
+
         });
 
       });
