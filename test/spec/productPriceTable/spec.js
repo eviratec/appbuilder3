@@ -91,7 +91,36 @@ describe("Case #2: abTable with <eviratec/schema/v1/product/price> schema", func
 
       $scope.$digest();
 
-      expect(element.html()).toContain("2017-01-01");
+      expect(element.html()).toContain(">PROMO<");
+      expect(element.html()).toContain(">LIST<");
+      expect(element.html()).toContain(">PURCH<");
+      expect(element.html()).toContain(">120<");
+      expect(element.html()).toContain(">61<");
+      expect(element.html()).toContain(">149<");
+      expect(element.html()).toContain(">AUD<");
+      expect(element.html()).toContain(">2016-01-01<");
+      expect(element.html()).toContain(">2017-01-01<");
+      expect(element.html()).toContain(">2017-07-01<");
+      expect(element.html()).toContain(">true<");
+
+    });
+
+    it("Adds the correct number of cells", function () {
+
+      let element;
+      let $scope = $rootScope.$new(true);
+
+      $scope.table = table;
+      $scope.schema = schema;
+      $scope.models = models;
+
+      element = $compile("<div ab-table=\"table\" ab-schema=\"schema\" ab-models=\"models\"></div>")($scope);
+
+      $scope.$digest();
+
+      let cellCount = element.html().match(/\<ab\-table\-cell /g).length;
+
+      expect(cellCount).toBe(30);
 
     });
 
