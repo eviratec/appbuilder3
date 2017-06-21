@@ -90,10 +90,12 @@
 
       scope.$watchCollection("abModels", (newModels) => {
 
-        if (!newModels.length) {
+        if (!newModels || !newModels.length) {
           return;
         }
         console.log(newModels,"****NEW MODELS",cols);
+
+        newModels = Array.of(newModels);
 
         newModels.forEach(newModel => {
           let modelRowEl = document.createElement("div");

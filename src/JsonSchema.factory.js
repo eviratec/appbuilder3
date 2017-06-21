@@ -59,6 +59,7 @@
         });
       }
       constructor (d) {
+        d = d || {};
         this._d = d;
         this.id = d.id;
         this.$schema = d.$schema;
@@ -82,6 +83,9 @@
     }
     return JsonSchema;
     function hydrate (jsonSchema, properties) {
+      if (!properties) {
+        return;
+      }
       Object.keys(properties).forEach(k => {
         let v = properties[k];
         let isArray = "array" === v.type;

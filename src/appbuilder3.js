@@ -19,7 +19,7 @@
 
   "use strict";
 
-  const AppBuilder3 = angular.module("AppBuilder3", [
+  let AppBuilder3 = angular.module("AppBuilder3", [
     "ngMaterial",
   ]);
 
