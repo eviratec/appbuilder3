@@ -61,12 +61,20 @@ div[ab-table] div.table-data div.table-row {
   border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
+div[ab-table] div.table-data div.table-row:last-of-type {
+  border-bottom: none;
+}
+
 div[ab-table] div.table-header div.col-header {
   display: inline-block;
   padding: 0 16px;
   box-sizing: border-box;
   background-color: rgba(66,66,66,1);
   color: rgba(255,255,255,0.7);
+}
+
+div[ab-table] div.table-footer {
+  display: none;
 }
 
 div[ab-table] div.table-footer div.col-footer {

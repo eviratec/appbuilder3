@@ -227,10 +227,7 @@
 
     function isPublicCol () {
       return col("is_public", "Public", function getCellValue (model, schema) {
-        let x = document.createElement("md-checkbox");
-        x.innerHTML = "Yes";
-        return x;
-        // return model.is_public;
+        return model.is_public;
       });
     }
 
