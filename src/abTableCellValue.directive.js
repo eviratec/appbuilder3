@@ -45,6 +45,7 @@
 
       // Listen for change events to enable binding
       el.on('blur keyup change', function() {
+        console.log(el.html());
         scope.$evalAsync(read);
       });
 

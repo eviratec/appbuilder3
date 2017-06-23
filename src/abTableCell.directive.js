@@ -43,7 +43,7 @@
       el.addClass(col.property + "-col table-cell");
 
       scope.ngModel = scope.abCol.cells.value(scope.abModel, scope.abSchema);
-console.log(scope.ngModel);
+
       let cellValueEl = document.createElement("div");
       cellValueEl.setAttribute("ab-table-cell-value", "");
       cellValueEl.setAttribute("contenteditable", "");
