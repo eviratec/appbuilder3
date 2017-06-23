@@ -23,6 +23,7 @@
   <style>
     body {
       padding: 0;
+      overflow: hidden;
     }
     section md-card.data-table div[ab-table] {
       overflow: scroll;
@@ -43,33 +44,31 @@
   </style>
 
 </head>
-<body ng-app="AppBuilder3">
+<body ng-app="AppBuilder3" layout>
 
   <header>
 
   </header>
 
   <section ng-controller="SpreadsheetController"
-           layout="row">
+           layout="row"
+           layout-fill>
 
-    <div flex>
+    <md-card class="data-table"
+      layout-fill>
 
-      <md-card class="data-table">
-
-        <md-toolbar>
-          <div class="md-toolbar-tools">
-            <h2>Spreadsheet</h2>
-          </div>
-        </md-toolbar>
-
-        <div ab-schema="schema"
-             ab-models="rows"
-             ab-table="table">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Spreadsheet</h2>
         </div>
+      </md-toolbar>
 
-      </md-card>
+      <div ab-schema="schema"
+           ab-models="rows"
+           ab-table="table">
+      </div>
 
-    </div>
+    </md-card>
 
   </section>
 
