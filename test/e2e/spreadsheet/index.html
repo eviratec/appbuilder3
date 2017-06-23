@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+
+  <title>(test/e2e): Spreadsheet</title>
+
+  <link rel="stylesheet"
+    type="text/css"
+    media="all"
+    href="../../../bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet"
+    type="text/css"
+    media="all"
+    href="../../../style.css" />
+
+  <script src="../../../bower_components/angular/angular.js"></script>
+  <script src="../../../bower_components/angular-animate/angular-animate.js"></script>
+  <script src="../../../bower_components/angular-aria/angular-aria.js"></script>
+  <script src="../../../bower_components/angular-material/angular-material.js"></script>
+  <script src="../../../bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="../../../bower_components/angular-messages/angular-messages.js"></script>
+
+</head>
+<body ng-app="AppBuilder3">
+
+  <header>
+
+  </header>
+
+  <section ng-controller="SpreadsheetController"
+           layout="row">
+
+    <div flex="30">
+
+
+    </div>
+
+    <div flex>
+
+      <md-card class="data-table">
+
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>Spreadsheet</h2>
+          </div>
+        </md-toolbar>
+
+        <div ab-schema="schema"
+             ab-models="rows"
+             ab-table="table">
+        </div>
+
+      </md-card>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+  </footer>
+
+  <script src="../../../src/appbuilder3.js"></script>
+  <script src="../../../src/abArray.directive.js"></script>
+  <script src="../../../src/abForm.directive.js"></script>
+  <script src="../../../src/abFormField.directive.js"></script>
+  <script src="../../../src/abObject.directive.js"></script>
+  <script src="../../../src/abTable.directive.js"></script>
+  <script src="../../../src/abTableCell.directive.js"></script>
+  <script src="../../../src/abTableCellValue.directive.js"></script>
+  <script src="../../../src/Array.controller.js"></script>
+  <script src="../../../src/fetchSchema.factory.js"></script>
+  <script src="../../../src/FormDirective.controller.js"></script>
+  <script src="../../../src/FormField.controller.js"></script>
+  <script src="../../../src/JsonSchema.factory.js"></script>
+  <script src="../../../src/Object.controller.js"></script>
+  <script src="../../../src/TableCellDirective.controller.js"></script>
+  <script src="../../../src/TableDirective.controller.js"></script>
+
+  <script src="spreadsheet.js"></script>
