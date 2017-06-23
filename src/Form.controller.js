@@ -17,6 +17,10 @@
 
 (function (angular) {
 
+  /**
+   * Example for demo (../index.html)
+   */
+
   "use strict";
 
   const AppBuilder3 = angular.module("AppBuilder3");
