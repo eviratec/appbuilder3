@@ -65,6 +65,24 @@
       }
     }
 
+    setTimeout(function () {
+      exportTableData();
+    }, 1000);
+
+    function exportTableData () {
+      let x = {
+        cols: [],
+        data: {},
+      };
+      $scope.table.cols.forEach(col => {
+        x.cols.push(col);
+        $scope.rows.forEach(row => {
+          x.data[col.property+"/"+row.id] = col.cells.value(row, $scope.schema);
+        });
+      });
+      console.log(JSON.stringify(x, undefined, "  "));
+    }
+
     function idCol () {
       return col("id", "", function getCellValue (model, schema) {
         return model.id;
