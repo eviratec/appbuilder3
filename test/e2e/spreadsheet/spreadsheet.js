@@ -41,7 +41,7 @@
 
     let tableCell = {};
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 1; i <= 5; i++) {
       $scope.rows.push({ id: "row#" + i, "col#0": "meow" });
     }
 
@@ -51,7 +51,7 @@
       ],
     };
 
-    for (let c = 0; c < 50; c++) {
+    for (let c = 1; c <= 50; c++) {
       let colId = "col#" + c;
       $scope.table.cols.push(col(colId, colId, function getCellValue (model, schema) {
         let r = model.id.split("#")[1];
@@ -60,7 +60,7 @@
     }
 
     function idCol () {
-      return col("id", "id", function getCellValue (model, schema) {
+      return col("id", "", function getCellValue (model, schema) {
         return model.id;
       });
     }
