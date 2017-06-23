@@ -242,10 +242,6 @@
           "onClick": function ($event, model, schema) {
             let key = property;
             let value = getValueFn(model, schema);
-            alert(
-              `Clicked '${key}' column, current value is '${value}' for` +
-              ` model ${model}`
-            );
           },
         },
       };
