@@ -21,6 +21,9 @@
   <script src="../../../bower_components/angular-messages/angular-messages.js"></script>
 
   <style>
+    body {
+      padding: 0;
+    }
     section md-card.data-table div[ab-table] {
       overflow: scroll;
     }
@@ -30,6 +33,12 @@
     }
     section md-card.data-table div[ab-table] ab-table-cell {
       border-right: 1px solid rgba(0,0,0,0.12);
+    }
+    section md-card.data-table div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.id-col.table-cell div[ab-table-cell-value] {
+      background-color: #f0f0f0;
+    }
+    section md-card.data-table div[ab-table] div.table-data div.table-row:hover ab-table-cell.table-cell.id-col.table-cell div[ab-table-cell-value] {
+      background-color: #e4e4e4;
     }
   </style>
 
