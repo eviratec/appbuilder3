@@ -50,18 +50,6 @@
       ],
     };
 
-    JsonSchema.load($scope.schemaUrl)
-      .then(function (res) {
-        console.log(res);
-        $timeout(function () {
-          $scope.schema = res;
-          // Object.assign($scope.schema, res.data);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
     function idCol () {
       return col("id", "id", function getCellValue (model, schema) {
         return model.id;
