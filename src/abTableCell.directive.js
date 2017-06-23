@@ -40,7 +40,19 @@
     function link (scope, el, attrs, ctrl) {
 
       let col = scope.abCol;
-      el.addClass(col.property + "-col");
+      el.addClass(col.property + "-col table-cell");
+
+      let cellValueEl = document.createElement("div");
+      cellValueEl.setAttribute("class", "ab-table-cell cell-value");
+      cellValueEl.setAttribute("contenteditable", "");
+      cellValueEl.innerHTML = col.cells.value(scope.abModel, scope.abSchema);
+
+      scope.$watch("abModel", function (newValue, oldValue) {
+
+      });
+
+      el[0].appendChild(cellValueEl);
+
 
     }
 

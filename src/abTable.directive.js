@@ -118,23 +118,13 @@
             cellScope.abCol = col;
             cellScope.abModel = newModel;
 
-            cellScope.onClick = function ($event) {
-              console.log("clicked on cell", $event);
-              let onClick = col.cells.onClick;
-              onClick && onClick($event, newModel, schema);
-            };
-
-            cellEl.setAttribute("class", "table-cell value");
             cellEl.setAttribute("flex", "");
             cellEl.setAttribute("ab-schema", "abSchema");
             cellEl.setAttribute("ab-col", "abCol");
             cellEl.setAttribute("ab-model", "abModel");
             cellEl.setAttribute("ng-click", "onClick($event)");
 
-            cellEl.innerHTML = col.cells.value(newModel, schema);
-
             $compile(modelRowEl.appendChild(cellEl))(cellScope);
-            // modelRowEl.appendChild(cellEl);
 
           });
 
