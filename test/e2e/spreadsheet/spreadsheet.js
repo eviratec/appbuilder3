@@ -39,26 +39,29 @@
 
     $scope.rows = [];
 
-    for (let i = 0; i < 50; i++) {
-      $scope.rows.push({ id: "row#" + i, textt: "meow" });
+    let tableCell = {};
+
+    for (let i = 0; i < 5; i++) {
+      $scope.rows.push({ id: "row#" + i, "col#0": "meow" });
     }
 
     $scope.table = {
       cols: [
         idCol(),
-        texttCol(),
       ],
     };
+
+    for (let c = 0; c < 50; c++) {
+      let colId = "col#" + c;
+      $scope.table.cols.push(col(colId, colId, function getCellValue (model, schema) {
+        let r = model.id.split("#")[1];
+        return tableCell[r+"/"+c];
+      }));
+    }
 
     function idCol () {
       return col("id", "id", function getCellValue (model, schema) {
         return model.id;
-      });
-    }
-
-    function texttCol () {
-      return col("textt", "Textt", function getCellValue (model, schema) {
-        return model.textt;
       });
     }
 
