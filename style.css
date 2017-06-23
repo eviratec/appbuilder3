@@ -51,7 +51,6 @@ div[ab-table] div.table-data div.table-row ab-table-cell.table-cell {
 div[ab-table] div.table-data div.table-row ab-table-cell.table-cell {
   display: inline-block;
   line-height: 48px;
-  padding: 0 16px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -134,4 +133,7 @@ div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.is_public-co
   width: 100px;
   min-width: 100px;
   -webkit-box-flex: initial;
+}
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell div[ab-table-cell-value] {
+    padding: 0 16px;
 }
