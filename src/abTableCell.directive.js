@@ -23,8 +23,8 @@
 
   AppBuilder3.directive("abTableCell", abTableCellDirective);
 
-  abTableCellDirective.$inject = ["$compile", "JsonSchema"];
-  function abTableCellDirective (  $compile,   JsonSchema) {
+  abTableCellDirective.$inject = ["$compile", "$sce", "JsonSchema"];
+  function abTableCellDirective (  $compile,   $sce,   JsonSchema) {
 
     return {
       restrict: "E",
@@ -42,17 +42,14 @@
       let col = scope.abCol;
       el.addClass(col.property + "-col table-cell");
 
+      scope.ngModel = scope.abCol.cells.value(scope.abModel, scope.abSchema);
+console.log(scope.ngModel);
       let cellValueEl = document.createElement("div");
-      cellValueEl.setAttribute("class", "ab-table-cell cell-value");
+      cellValueEl.setAttribute("ab-table-cell-value", "");
       cellValueEl.setAttribute("contenteditable", "");
-      cellValueEl.innerHTML = col.cells.value(scope.abModel, scope.abSchema);
+      cellValueEl.setAttribute("ng-model", "ngModel");
 
-      scope.$watch("abModel", function (newValue, oldValue) {
-
-      });
-
-      el[0].appendChild(cellValueEl);
-
+      $compile(el[0].appendChild(cellValueEl))(scope);
 
     }
 
