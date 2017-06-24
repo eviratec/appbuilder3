@@ -9,6 +9,8 @@ describe("Case #4: Spreadsheet", function () {
   let $compile;
   let $rootScope;
 
+  let $scope;
+
   let tableCellIndex;
   let table;
   let schema;
@@ -21,6 +23,8 @@ describe("Case #4: Spreadsheet", function () {
     JsonSchema = _JsonSchema_;
     $compile = _$compile_;
     $rootScope = _$rootScope_;
+
+    $scope = $rootScope.$new(true);
 
     // Row schema
     schema = new JsonSchema({
@@ -90,8 +94,7 @@ describe("Case #4: Spreadsheet", function () {
 
     it("Adds the appropriate column header cells", function () {
 
-      var element;
-      var $scope = $rootScope.$new(true);
+      let element;
 
       $scope.table = table;
       $scope.schema = schema;
@@ -102,8 +105,8 @@ describe("Case #4: Spreadsheet", function () {
       $scope.$digest();
 
       expect(element.html()).toContain("table-header");
+      expect(element.html()).toContain("col#1");
       expect(element.html()).toContain("col#7");
-      expect(element.html()).toContain("row#5");
 
     });
 
@@ -113,8 +116,7 @@ describe("Case #4: Spreadsheet", function () {
 
     it("Adds the appropriate content", function () {
 
-      var element;
-      var $scope = $rootScope.$new(true);
+      let element;
 
       $scope.table = table;
       $scope.schema = schema;
@@ -126,12 +128,35 @@ describe("Case #4: Spreadsheet", function () {
 
       expect(element.html()).toContain("5/7");
 
+      expect(element.html()).toContain("row#5");
+      expect(element.html()).toContain("row#5");
+
+    });
+
+    it("Adds the appropriate cell classes", function () {
+
+      let className;
+      let element;
+
+      $scope.table = table;
+      $scope.schema = schema;
+      $scope.models = models;
+
+      element = $compile("<div ab-table=\"table\" ab-schema=\"schema\" ab-models=\"models\"></div>")($scope);
+
+      $scope.$digest();
+
+      className = element.find("ab-table-cell")[0].className;
+
+      expect(className).toContain("flex");
+      expect(className).toContain("id-col");
+      expect(className).toContain("table-cell");
+
     });
 
     it("Adds the correct number of cells", function () {
 
       let element;
-      let $scope = $rootScope.$new(true);
 
       $scope.table = table;
       $scope.schema = schema;
