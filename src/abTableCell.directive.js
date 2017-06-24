@@ -52,7 +52,6 @@
       $compile(el[0].appendChild(cellValueEl))(scope);
 
 
-
       // Listen for change events to enable binding
       el.on('click focus', function() {
         angular.element(cellValueEl).focus();
