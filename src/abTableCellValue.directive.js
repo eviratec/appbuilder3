@@ -50,7 +50,11 @@
         scope.$evalAsync(read);
       });
 
-      // read();
+      el.on('focus', function (event) {
+        window.requestAnimationFrame(function () {
+          window.getSelection().selectAllChildren(el[0]);
+        });
+      });
 
       // Write data to the model
       function read() {
