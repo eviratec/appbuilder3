@@ -1,5 +1,7 @@
 # AppBuilder3
 
+[![Build Status](https://travis-ci.org/eviratec/appbuilder3.svg?branch=master)](https://travis-ci.org/eviratec/appbuilder3)
+
 - [AppBuilder3 Wiki](https://github.com/eviratec/appbuilder3/wiki)
 - [Try the demo on Codepen.io](https://codepen.io/eviratec-software/pen/NgpZbL)
 
