@@ -3,6 +3,8 @@ sudo: required
 dist: trusty
 
 addons:
+  code_climate:
+    repo_token: 1d02189a3d24741ab503e0a12966794513099dabbaf67dd4f774ec4a69906c7a
   apt:
     sources:
       - google-chrome
@@ -27,6 +29,10 @@ before_script:
 
 script:
   - npm test
+
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < lcov.info
 
 git:
   depth: 10
