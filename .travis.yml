@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 language: node_js
 
 addons:
@@ -24,8 +26,6 @@ before_script:
 
 script:
   - npm test
-
-sudo: true
 
 git:
   depth: 10
