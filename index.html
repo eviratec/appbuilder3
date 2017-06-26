@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <title></title>
+  <title>(dev/example): Product Editor</title>
 
   <link rel="stylesheet"
     type="text/css"
@@ -27,12 +27,48 @@
 
   </header>
 
-  <section ng-controller="FormController">
-    <form ab-schema="schema"
-      ab-form="form"
-      ab-model="model"
-      layout="column">
-    </form>
+  <section ng-controller="FormController"
+           layout="row">
+
+    <div flex="30">
+
+      <md-card class="data-form">
+
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h1>Product</h1>
+          </div>
+        </md-toolbar>
+
+        <form ab-schema="schema"
+              ab-form="form"
+              ab-model="model"
+              layout="column">
+        </form>
+
+      </md-card>
+
+    </div>
+
+    <div flex>
+
+      <md-card class="data-table">
+
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>Product > Prices</h2>
+          </div>
+        </md-toolbar>
+
+        <div ab-schema="productPriceSchema"
+             ab-models="prices"
+             ab-table="table">
+        </div>
+
+      </md-card>
+
+    </div>
+
   </section>
 
   <footer>
@@ -44,6 +80,9 @@
   <script src="src/abForm.directive.js"></script>
   <script src="src/abFormField.directive.js"></script>
   <script src="src/abObject.directive.js"></script>
+  <script src="src/abTable.directive.js"></script>
+  <script src="src/abTableCell.directive.js"></script>
+  <script src="src/abTableCellValue.directive.js"></script>
   <script src="src/Array.controller.js"></script>
   <script src="src/fetchSchema.factory.js"></script>
   <script src="src/Form.controller.js"></script>
@@ -51,3 +90,5 @@
   <script src="src/FormField.controller.js"></script>
   <script src="src/JsonSchema.factory.js"></script>
   <script src="src/Object.controller.js"></script>
+  <script src="src/TableCellDirective.controller.js"></script>
+  <script src="src/TableDirective.controller.js"></script>

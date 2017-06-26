@@ -15,15 +15,17 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-(function () {
+(function (angular) {
 
   "use strict";
 
-  let AppBuilder3 = angular.module("AppBuilder3", [
-    "ngMaterial",
-  ]);
+  const AppBuilder3 = angular.module("AppBuilder3");
 
-  AppBuilder3.constant("JSON_SCHEMA_SPEC_URL",
-    "https://raw.githubusercontent.com/eviratec/schema/master/v1/product.json#");
+  AppBuilder3.controller("TableDirectiveController", TableDirectiveController);
+
+  TableDirectiveController.$inject = ["$scope"];
+  function TableDirectiveController (  $scope) {
+    
+  }
 
 })(angular);

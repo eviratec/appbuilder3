@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+
+  <title>(test/e2e): Spreadsheet</title>
+
+  <link rel="stylesheet"
+    type="text/css"
+    media="all"
+    href="../../../bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet"
+    type="text/css"
+    media="all"
+    href="../../../style.css" />
+
+  <script src="../../../bower_components/angular/angular.js"></script>
+  <script src="../../../bower_components/angular-animate/angular-animate.js"></script>
+  <script src="../../../bower_components/angular-aria/angular-aria.js"></script>
+  <script src="../../../bower_components/angular-material/angular-material.js"></script>
+  <script src="../../../bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="../../../bower_components/angular-messages/angular-messages.js"></script>
+
+  <style>
+    body {
+      padding: 0;
+      overflow: hidden;
+    }
+    section md-card.data-table div[ab-table] {
+      overflow: scroll;
+    }
+    section md-card.data-table div[ab-table] ab-table-cell,
+    section md-card.data-table div[ab-table] .col-header {
+      min-width: 100px;
+    }
+    section md-card.data-table div[ab-table] ab-table-cell {
+      border-right: 1px solid rgba(0,0,0,0.12);
+    }
+    section md-card.data-table div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.id-col.table-cell div[ab-table-cell-value] {
+      background-color: #f0f0f0;
+    }
+    section md-card.data-table div[ab-table] div.table-data div.table-row:hover ab-table-cell.table-cell.id-col.table-cell div[ab-table-cell-value] {
+      background-color: #e4e4e4;
+    }
+  </style>
+
+</head>
+<body ng-app="AppBuilder3" layout>
+
+  <header>
+
+  </header>
+
+  <section ng-controller="SpreadsheetController"
+           layout="row"
+           layout-fill>
+
+    <md-card class="data-table"
+      layout-fill>
+
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Spreadsheet</h2>
+        </div>
+      </md-toolbar>
+
+      <div ab-schema="schema"
+           ab-models="rows"
+           ab-table="table">
+      </div>
+
+    </md-card>
+
+  </section>
+
+  <footer>
+
+  </footer>
+
+  <script src="../../../src/appbuilder3.js"></script>
+  <script src="../../../src/abArray.directive.js"></script>
+  <script src="../../../src/abForm.directive.js"></script>
+  <script src="../../../src/abFormField.directive.js"></script>
+  <script src="../../../src/abObject.directive.js"></script>
+  <script src="../../../src/abTable.directive.js"></script>
+  <script src="../../../src/abTableCell.directive.js"></script>
+  <script src="../../../src/abTableCellValue.directive.js"></script>
+  <script src="../../../src/Array.controller.js"></script>
+  <script src="../../../src/fetchSchema.factory.js"></script>
+  <script src="../../../src/FormDirective.controller.js"></script>
+  <script src="../../../src/FormField.controller.js"></script>
+  <script src="../../../src/JsonSchema.factory.js"></script>
+  <script src="../../../src/Object.controller.js"></script>
+  <script src="../../../src/TableCellDirective.controller.js"></script>
+  <script src="../../../src/TableDirective.controller.js"></script>
+
+  <script src="spreadsheet.js"></script>

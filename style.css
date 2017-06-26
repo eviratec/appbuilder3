@@ -1,7 +1,24 @@
-
-form {
+body {
   padding: 60px;
-  background-color: rgba(0,0,0,0.12);
+}
+html,
+body {
+  cursor: default;
+}
+form {
+
+}
+md-card form.flat-form {
+  padding: 24px;
+}
+md-card.data-table md-toolbar {
+  border-radius: 3px 3px 0 0;
+}
+md-card.data-table md-toolbar .md-toolbar-tools {
+  background-color: rgba(55,55,55,1);
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  border-radius: 3px 3px 0 0;
 }
 ab-object {
   border-top:  1px solid rgba(0,0,0,0.12);
@@ -20,4 +37,103 @@ ab-array {
 
 ab-array div:nth-of-type(1) {
   font-size:  2em;
+}
+
+ab-form-field.prop-prices {
+  display: none;
+}
+
+div[ab-table] div.table-header div.col-header,
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell {
+  text-align: center;
+}
+
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell {
+  display: inline-block;
+  line-height: 48px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div[ab-table] div.table-data div.table-row {
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+div[ab-table] div.table-data div.table-row:last-of-type {
+  border-bottom: none;
+}
+
+div[ab-table] div.table-header div.col-header {
+  display: inline-block;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background-color: rgba(66,66,66,1);
+  color: rgba(255,255,255,0.7);
+}
+
+div[ab-table] div.table-footer {
+  display: none;
+}
+
+div[ab-table] div.table-footer div.col-footer {
+  display: inline-block;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,0.1);
+}
+div[ab-table] div.table-footer div.col-footer md-input-container {
+  margin-bottom: 0;
+}
+
+div[ab-table] div.table-header {
+  line-height: 32px;
+  text-transform: uppercase;
+  font-size: 12.2px;
+  border-top: 1px solid rgba(99,99,99,1);
+  box-sizing: border-box;
+}
+
+.table-row.model.ng-scope.layout-row:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+section.ng-scope {
+  margin-bottom: 80px;
+}
+
+div[ab-table] div.table-header div.col-header.price-col,
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.price-col {
+  text-align: right;
+  flex: initial;
+  width: 10%;
+  min-width: 10%;
+  -webkit-box-flex: initial;
+}
+div[ab-table] div.table-header div.col-header.currency-col,
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.currency-col {
+  text-align: left;
+  flex: initial;
+  width: 10%;
+  min-width: 10%;
+  -webkit-box-flex: initial;
+}
+div[ab-table] div.table-header div.col-header.type-col,
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.type-col {
+  text-align: left;
+  flex: initial;
+  width: 20%;
+  min-width: 20%;
+  -webkit-box-flex: initial;
+}
+div[ab-table] div.table-header div.col-header.is_public-col,
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell.is_public-col {
+  text-align: center;
+  flex: initial;
+  width: 100px;
+  min-width: 100px;
+  -webkit-box-flex: initial;
+}
+div[ab-table] div.table-data div.table-row ab-table-cell.table-cell div[ab-table-cell-value] {
+    padding: 0 16px;
 }

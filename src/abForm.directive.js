@@ -44,6 +44,8 @@
       ctrl.form = scope.abForm;
       ctrl.model = scope.abModel;
 
+      el.addClass("flat-form");
+
       scope.$watch("abSchema", (newValue) => {
         if (undefined === newValue || !newValue.$schema) {
           return;
