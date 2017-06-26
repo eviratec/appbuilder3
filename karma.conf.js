@@ -11,8 +11,7 @@ module.exports = function (config) {
         ],
       },
     },
-    //browsers: ["Chrome"],
-    browsers: ["PhantomJS"],
+    browsers: ["Chrome"],
     files: [
       {pattern: 'test/*/**/*/data/*.json', watched: true, included: false, served: true, nocache: true},
       "bower_components/angular/angular.js",
