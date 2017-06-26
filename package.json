@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start"
+    "test": "./node_modules/karma/bin/karma start --single-run"
   },
   "author": "Callan Milne <callan.milne@eviratec.com.au>",
   "license": "ISC",
